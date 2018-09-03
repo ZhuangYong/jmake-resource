@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>关于我们</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            color: white;
+            text-align: center;
+        }
+
+        html {
+            background-image: url("../../img/ott/about-us.jpg");
+            background-size: cover;
+        }
+        .container{
+            display: flex;
+            justify-items: center;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+        }
+        p.content {
+            padding: 0 14%;
+            margin: .2rem 0;
+            text-indent: 1.4rem;
+            font-size: .66rem;
+            text-align: left;
+        }
+        p.title {
+            font-size: .7rem;
+            margin: 1.44rem 0 1.2rem 0;
+        }
+        p.info {
+            font-size: .42rem;
+            margin: .2rem 0 1rem 0;
+        }
+        p.info font{
+            margin: 0 .4rem;
+        }
+        .qa{
+            text-align: center;
+        }
+        .qa img{
+            margin-top: 1rem;
+            width: 4.4rem;
+        }
+        .qa span{
+            display: block;
+            width: 4rem;
+            margin: auto;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: .2rem;
+            border-radius: .2rem;
+        }
+        .qa span font{
+            font-size: .42rem;
+            display: block
+        }
+        hr{
+            width: 56%;
+            margin: .4rem auto .2rem auto;
+            border: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <p class="title">关于我们</p>
+            <p class="content">天津金麦客科技有限公司成立于2016年8月，为北京流金岁月文化传播股份有限公司旗下子公司。</p>
+            <p class="content">公司秉承“把专业卡拉OK带回家”的市场理念，专注于极致的用户体验，丰富的音乐内容，致力于“强版权、重体验”的家庭娱乐产品研发。</p>
+            <p class="content">金麦客与全国多家知名音响品牌强强联手，为用户提供30万首+正版歌曲，并获得CIBN牌照授权，旨在打造全新的互联网家庭娱乐平台。</p>
+            <p class="qa">
+                <img src="../../img/ott/qa.png"/>
+            </p>
+            <p class="qa">
+            <span>
+                <font>金麦客微信公众号</font>
+                <font style="font-size: .27rem"><i style="font-style: normal; color: #f95c2e">扫码关注- </i>推送最新音乐资讯</font>
+            </span>
+            </p>
+            <hr>
+            <p class="info">
+                <font>
+                    官方网站：www.j-make.cn
+                </font>
+                <font>
+                    客服电话：400-028-6969
+                </font>
+            </p>
+        </div>
+    </div>
+</body>
+<script>
+    function setSize() {
+        var ww = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        var remSize;
+        // 默认为宽度十分之一
+        // if (ww >= 768) {
+            remSize = ww / 32;
+        // } else {
+        //     remSize = ww / 10;
+        // }
+        document.documentElement.style.fontSize = remSize + "px";
+    }
+    var timer;
+    window.addEventListener('resize', function () {
+        clearTimeout(timer);
+        timer = setTimeout(setSize, 300);
+    });
+    setSize();
+</script>
+</html>
