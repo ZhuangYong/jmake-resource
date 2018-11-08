@@ -52,7 +52,6 @@
             background: #ffffff26 url("../../../img/ott/chongqing/fail.png") no-repeat 10% center;
         }
         .status.success{
-            width: 60%;
             background: #ffffff26 url("../../../img/ott/chongqing/success.png") no-repeat 10% center;
         }
         .status-info{
@@ -87,9 +86,9 @@
                 <p style="font-size: .6rem; margin-top: .5rem;">错误编码：<font class="error-code"></font></p>
             </div>
             <div class="status-info success-info hide">
-                <p style="font-size: .96rem; text-shadow: -3px 0px 6px #d91800, 0px -3px 6px #d91800, 3px 1px 6px #d91800, 0 3px 6px #d91800; margin-bottom: .3rem;">恭喜您成为金麦客VIP会员</p>
-                <p style="font-size: .6rem"><font class="product-name"></font> / ￥<font class="payment"></font></p>
-                <p style="font-size: .6rem">会员有效期：<font class="start-time"></font> - <font class="end-time"></font></p>
+                <p style="font-size: .96rem; text-shadow: -3px 0px 6px #d91800, 0px -3px 6px #d91800, 3px 1px 6px #d91800, 0 3px 6px #d91800; margin-bottom: .3rem;">恭喜您成为<font class="product-name"></font></p>
+                <p style="font-size: .6rem">支付金额：￥<font class="payment"></font></p>
+                <p style="font-size: .6rem">会员有效期：<font class="end-time"></font></p>
             </div>
         </div>
     </div>
@@ -97,14 +96,14 @@
 <script>
     // 过期时间——expireDate，产品名—— productName，价格——price
     // 状态码——status
-    var expireDate = getQueryString("expireDate");
+    var expireDate = decodeURI(getQueryString("expireDate"));
     var productName = decodeURI(getQueryString("productName") || "");
     var price = getQueryString("price");
     var status = getQueryString("status");
 
     $(".error-code").innerHTML = status;
     $(".payment").innerHTML = price;
-    $(".start-time").innerHTML = parseTime(new Date(), "{y}/{m}/{d}");
+    // $(".start-time").innerHTML = parseTime(new Date(), "{y}/{m}/{d}");
     $(".end-time").innerHTML = expireDate;
     $(".product-name").innerHTML = productName;
     if (status == 200) {
@@ -147,36 +146,6 @@
 
     function $(id) {
         return document.querySelector(id);
-    }
-    function parseTime(time, cFormat) {
-        if (arguments.length === 0) {
-            return null;
-        }
-        var format = cFormat || '{y}-{m}-{d} {h}:{i}:{s}';
-        var date;
-        if (typeof time === 'object') {
-            date = time;
-        } else {
-            if (('' + time).length === 10) time = parseInt(time, 0) * 1000;
-            date = new Date(time);
-        }
-        const formatObj = {
-            y: date.getFullYear(),
-            m: date.getMonth() + 1,
-            d: date.getDate(),
-            h: date.getHours(),
-            i: date.getMinutes(),
-            s: date.getSeconds(),
-            a: date.getDay()
-        };
-        return format.replace(/{(y|m|d|h|i|s|a)+}/g, function(result, key) {
-            var value = formatObj[key];
-            if (key === 'a') return ['一', '二', '三', '四', '五', '六', '日'][value - 1];
-            if (result.length > 0 && value < 10) {
-                value = '0' + value;
-            }
-            return value || 0;
-        });
     }
 </script>
 </html>
