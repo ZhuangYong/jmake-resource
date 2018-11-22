@@ -1,0 +1,47 @@
+{
+  "name": "j-make-web",
+  "version": "1.0.0",
+  "description": "",
+  "author": "",
+  "homepage": "",
+  "private": true,
+  "devDependencies": {
+    "browser-sync": "^2.18.13",
+    "del": "^3.0.0",
+    "el": "^0.2.3",
+    "fs": "0.0.1-security",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-changed": "^1.3.2",
+    "gulp-clean-css": "^3.9.0",
+    "gulp-html-beautify": "^1.0.1",
+    "gulp-if": "^2.0.2",
+    "gulp-replace": "^0.6.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^3.0.0",
+    "gulp-uncss": "^1.0.6",
+    "gulp-useref": "^3.1.2",
+    "path": "^0.12.7",
+    "run-sequence": "^2.2.0",
+    "weinre": "^2.0.0-pre-I0Z7U9OV"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "configs": {
+    "directories": {
+      "archive": "archive",
+      "dist": "dist",
+      "src": "src",
+      "test": "test"
+    }
+  },
+  "scripts": {
+    "build": "gulp build",
+    "test": "gulp archive && mocha --reporter spec --timeout 5000",
+    "dev": "gulp dev  "
+  },
+  "dependencies": {
+    "gulp-content-includer": "0.0.7"
+  }
+}
