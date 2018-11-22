@@ -110,18 +110,23 @@
         $(".title").innerHTML = "支付成功";
         $(".status").classList.add("success");
         $(".success-info").classList.remove("hide");
-        if (price) {
-            $(".payment").classList.remove("hide");
-        }
-        if (expireDate) {
-            $(".end-time").classList.remove("hide");
-        }
+        // if (price) {
+        //     $(".payment").classList.remove("hide");
+        // }
+        // if (expireDate) {
+        //     $(".end-time").classList.remove("hide");
+        // }
     } else {
         $(".title").innerHTML = "支付失败";
         $(".status").classList.add("fail");
         $(".fail-info").classList.remove("hide");
     }
 
+    callOtt();
+
+    function callOtt() {
+        window.JSCampaign && window.JSCampaign.updateUser && window.JSCampaign.updateUser();
+    }
 
     function setSize() {
         var ww = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
