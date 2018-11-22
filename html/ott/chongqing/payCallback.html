@@ -87,8 +87,8 @@
             </div>
             <div class="status-info success-info hide">
                 <p style="font-size: .96rem; text-shadow: -3px 0px 6px #d91800, 0px -3px 6px #d91800, 3px 1px 6px #d91800, 0 3px 6px #d91800; margin-bottom: .3rem;">恭喜您成为<font class="product-name"></font></p>
-                <p style="font-size: .6rem">支付金额：￥<font class="payment"></font></p>
-                <p style="font-size: .6rem">会员有效期：<font class="end-time"></font></p>
+                <p style="font-size: .6rem" class="payment hide">支付金额：￥<font ></font></p>
+                <p style="font-size: .6rem" class="end-time hide">会员有效期：<font></font></p>
             </div>
         </div>
     </div>
@@ -97,19 +97,25 @@
     // 过期时间——expireDate，产品名—— productName，价格——price
     // 状态码——status
     var expireDate = decodeURI(getQueryString("expireDate"));
-    var productName = decodeURI(getQueryString("productName") || "");
+    var productName = decodeURI(getQueryString("productName") || "金麦客VIP会员");
     var price = getQueryString("price");
     var status = getQueryString("status");
 
     $(".error-code").innerHTML = status;
-    $(".payment").innerHTML = price;
+    $(".payment font").innerHTML = price;
     // $(".start-time").innerHTML = parseTime(new Date(), "{y}/{m}/{d}");
-    $(".end-time").innerHTML = expireDate;
+    $(".end-time font").innerHTML = expireDate;
     $(".product-name").innerHTML = productName;
     if (status == 200) {
         $(".title").innerHTML = "支付成功";
         $(".status").classList.add("success");
         $(".success-info").classList.remove("hide");
+        if (price) {
+            $(".payment").classList.remove("hide");
+        }
+        if (expireDate) {
+            $(".end-time").classList.remove("hide");
+        }
     } else {
         $(".title").innerHTML = "支付失败";
         $(".status").classList.add("fail");
