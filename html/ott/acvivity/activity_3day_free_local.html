@@ -60,6 +60,7 @@
     var BTN_STATUS_DISABLE = 2;
     var domain = window.location.host;
     var id = getQueryString("id") || "";
+    var activityUuid = getQueryString("activeType") || "";
     var btnStatus = BTN_STATUS_DISABLE;
     var activeBtn = document.querySelector("#activity-btn");
 
@@ -80,7 +81,7 @@
     function check() {
         showWait();
         ajax({
-            url: "http://" + domain + "/activity/check/1234567?id=" + id,
+            url: "http://" + domain + "/activity/check/" + activityUuid + "?id=" + id,
             type: "GET",
             data: {},
             dataType: "json",
