@@ -20,31 +20,31 @@
             height: 100%;
             border: none;
             position: absolute;
-            background: url("../../img/ott/activity/3dayFree.jpg") no-repeat;
+            background: url("../../../img/ott/activity/3dayFree.jpg") no-repeat;
             background-size: cover;
         }
 
         #activity-btn-container {
             left: 50%;
             width: 1px;
-            bottom: 10%;
+            bottom: 1.6rem;
             position: fixed;
             display: flex;
             justify-content: center;
         }
         #activity-btn {
-            min-width: 240px;
-            height: 46px;
+            min-width: 11rem;
+            height: 2.2rem;
             border: none;
-            border-radius: 46px;
-            font-size: 20px;
+            border-radius: 4rem;
+            font-size: .9rem;
             color: white;
+            outline: none;
             background-image: -webkit-linear-gradient(left, #f03141, #f77f28);
         }
-        #activity-btn:focus {
-            border: none;
+        #activity-btn.error {
+            background-image: -webkit-linear-gradient(left, #454545, #838383) !important;
         }
-
     </style>
 </head>
 <body>
@@ -58,9 +58,9 @@
     var BTN_STATUS_ENABLE = 1;
     var BTN_STATUS_DISABLE = 2;
     // test
-    var domain = "bmstest.j-make.com.cn";
+    //var domain = "bmstest.j-make.com.cn";
     //pro
-    // var domain = "Portalmy.j-make.cn";
+    var domain = "portalmy.j-make.cn";
     var id = getQueryString("id") || "";
     var btnStatus = BTN_STATUS_DISABLE;
     var activeBtn = document.querySelector("#activity-btn");
@@ -68,6 +68,8 @@
     document.querySelector("#activity-btn").focus();
 
     check();
+    // showBtnTxt("立即领取");
+    // btnStatus = BTN_STATUS_ENABLE;
     // for local network
     // function activityClick() {
     //     var params = getQueryString("activeType");
@@ -95,6 +97,7 @@
                 }
             },
             fail: function (status) {
+                showError();
                 showBtnTxt("操作失败，请稍后重试");
             }
         });
@@ -125,8 +128,13 @@
                 }
             },
             fail: function (status) {
-                btnStatus = BTN_STATUS_ENABLE;
+                showError();
                 showBtnTxt("操作失败，请稍后重试");
+                setTimeout(function () {
+                    cleanError();
+                    showBtnTxt("立即领取");
+                    btnStatus = BTN_STATUS_ENABLE;
+                }, 3000);
             }
         });
     }
@@ -184,12 +192,35 @@
         arr.push(("v=" + Math.random()).replace(".",""));
         return arr.join("&");
     }
-
+    function showError() {
+        document.querySelector("#activity-btn").classList.add("error");
+    }
+    function cleanError() {
+        document.querySelector("#activity-btn").classList.remove("error");
+    }
     function showWait() {
         showBtnTxt("请稍等……");
     }
     function showBtnTxt(msg) {
         activeBtn.innerHTML = msg;
     }
+
+    function setSize() {
+        var ww = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        var remSize;
+        // 默认为宽度十分之一
+        // if (ww >= 768) {
+        remSize = ww / 32;
+        // } else {
+        //     remSize = ww / 10;
+        // }
+        document.documentElement.style.fontSize = remSize + "px";
+    }
+    var timer;
+    window.addEventListener('resize', function () {
+        clearTimeout(timer);
+        timer = setTimeout(setSize, 300);
+    });
+    setSize();
 </script>
 </html>
