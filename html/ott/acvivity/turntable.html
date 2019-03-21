@@ -15,7 +15,12 @@
             overflow: hidden;
             background-color: black;
         }
-
+        button {
+            outline: none;
+        }
+        .focus-able:focus {
+            box-shadow: 0 0 2px 3px #29ffca;
+        }
         .hide {
             display: none;
         }
@@ -24,7 +29,15 @@
             height: 100%;
             border: none;
             position: absolute;
-            background: url("../../../img/ott/activity/turntable_bg.jpg") no-repeat;
+            background: url("../../../img/ott/activity/turntable/turntable_bg.jpg") no-repeat;
+            background-size: cover;
+        }
+        #record {
+            width: 100%;
+            height: 100%;
+            border: none;
+            position: absolute;
+            background: url("../../../img/ott/activity/turntable/turntable_record_bg.jpg") no-repeat;
             background-size: cover;
         }
 
@@ -78,8 +91,9 @@
             width: 90%;
             height: 90%;
             margin-left: 5%;
+            border-radius: 5px;
             position: relative;
-            background: url(../../../img/ott/activity/start_btn.png) no-repeat;
+            background: url(../../../img/ott/activity/start_btn.png) no-repeat center;
             background-size: contain;
         }
 
@@ -106,7 +120,7 @@
             flex: 0 0 33.33%;
         }
 
-        .item span {
+        .turntable .item span {
             float: left;
             width: 93%;
             height: 93%;
@@ -118,7 +132,7 @@
             background-color: white;
         }
 
-        .item span i {
+        .turntable .item span i {
             top: .1rem;
             left: 0;
             width: 100%;
@@ -127,15 +141,15 @@
             position: absolute;
         }
 
-        .item span img {
+        .turntable .item span img {
             height: 100%;
         }
 
-        .item i {
+        .turntable .item i {
 
         }
 
-        .item p {
+        .turntable .item p {
             width: 100%;
             margin: 0;
             position: absolute;
@@ -161,6 +175,91 @@
         }
         .active span{
             background-color: yellow;
+        }
+
+        .button-msg {
+            left: 50%;
+            top: 50%;
+            z-index: 10;
+            border: none;
+            width: 200px;
+            height: 200px;
+            margin-left: -100px;
+            margin-top: -100px;
+            position: absolute;
+            transition: .5s all ease;
+            background-color: transparent;
+        }
+        .button-msg img{
+            width: 100%;
+        }
+        .mask{
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9;
+            position: absolute;
+            transition: .5s fade ease;
+            background-color: rgba(0, 0, 0, .6)
+        }
+
+        .record-container{
+            width: 58%;
+            left: 0;
+            top: 15%;
+            height: 62%;
+            padding: 0 1rem;
+            position: absolute;
+        }
+        .device-id{
+            font-size: .6rem;
+            color: white;
+        }
+        #record .item {
+            border: none;
+            display: block;
+            width: 100%;
+            float: left;
+            color: white;
+            font-size: 0.6rem;
+            position: relative;
+            padding-top: .2rem;
+            padding-left: 1.4rem;
+            text-align: left;
+            background-color: transparent;
+        }
+        #record .item:focus {
+            color: #f8f071;
+        }
+        #record i {
+            top: .1rem;
+            left: 0;
+            width: 1rem;
+            height: 1rem;
+            display: flex;
+            color: #a429f9;
+            font-size: .56rem;
+            justify-content: center;
+            align-items: center;
+            font-style: normal;
+            position: absolute;
+            background-color: white;
+            border-radius: 1rem;
+        }
+
+        #record .item:focus i{
+            background-color: #f8f071;
+        }
+        #record p {
+            margin: 0 0 .4rem 0;
+        }
+        #record font {
+            font-size: .54rem;
+        }
+        .record-content {
+            height: 100%;
+            overflow: auto;
         }
     </style>
 </head>
@@ -201,8 +300,8 @@
                 </span>
             </div>
             <div class="item">
-                <button class="start-btn" onclick="start()">
-                    <font>还剩下4次</font>
+                <button class="start-btn focus-able" onclick="start()">
+                    <font></font>
                 </button>
             </div>
             <div class="item item-3">
@@ -213,7 +312,7 @@
                     <p>4</p>
                 </span>
             </div>
-            <div class="item item-7">
+            <div class="item item-6">
                  <span>
                     <i>
                         <img src="">
@@ -244,12 +343,40 @@
     <div class="winner-container">
 
     </div>
-    <div id="record-btn-container">
-        <button id="record-btn" onclick="recordClick()">查看中奖记录</button>
+    <div id="record-btn-container" class="hide">
+        <button class="focus-able" id="record-btn" onclick="showRecord()">查看中奖记录</button>
     </div>
     
     <div class="msg hide">
         
+    </div>
+
+    <button class="button-msg button-msg-have-chance hide" onclick="hideChanceMsg()">
+        <img src="../../../img/ott/activity/turntable/have-chance.png">
+    </button>
+
+    <button class="button-msg button-msg-done-chance hide" onclick="alertQrCode()">
+        <img src="../../../img/ott/activity/turntable/done-chance.png">
+    </button>
+
+    <button class="button-msg button-msg-no-chance hide" onclick="alertQrCode()">
+        <img src="../../../img/ott/activity/turntable/no-chance.png">
+    </button>
+
+    <button class="button-msg button-msg-qrcode hide">
+        <img src="">
+    </button>
+
+
+    <span class="mask hide"/>
+</div>
+
+<div id="record">
+    <div class="record-container">
+        <p class="device-id">设备ID：<font></font></p>
+
+        <div class="record-content">
+        </div>
     </div>
 </div>
 </body>
@@ -258,7 +385,7 @@
     var runtimer;
     var clock;
     var currentIndex = 0;
-    var gameTime = 1;
+    var isAlert = false;
     var STATUS_NONE = 1;
     var STATUS_STARTING = 2;
     var STATUS_ENDING = 3;
@@ -268,12 +395,41 @@
     var FAKE_RANDOM_SPEED = 500;
     var randomStartTime = 0;
     var status = STATUS_NONE;
-    var domain = window.location.host;
-    var id = getQueryString("id") || "";
+    var deviceUuid = getQueryString("id") || "";
     var activityUuid = getQueryString("activeType") || "";
-    var activeBtn = document.querySelector("#record-btn");
 
-    document.querySelector("#record-btn").focus();
+
+    // var domain = window.location.host;
+    // var domain = "portalmy.j-make.cn";
+    // var domain = "bmstest.j-make.com.cn";
+    var domain = "http://10.0.7.147:8080";
+    var API_PRICE_LIST = domain + "/luckyspin/list";
+    var API_PRICE_CHANCE = domain + "/luckyspin/chance";
+    var API_PRICE_JACKPOT = domain + "/luckyspin/jackpot";
+    var API_PRICE_MY_RECORD = domain + "/luckyspin/prizes";
+    var API_CHARGE_QRCODE = domain + "/luckyspin/qrcode";
+
+    var prizeData = [];
+
+    // 抽奖次数
+    var pricesCount = [];
+
+    // 我的抽奖记录
+    var myRecords = [];
+
+    // 中奖uuid
+    var prizeUuid;
+
+    var PAGE_TURNTABLE = 1;
+    var PAGE_RECORD = 2;
+    var currentPage = PAGE_TURNTABLE;
+
+    window.onhashchange = hashChange;
+    hashChange();
+    getPrices();
+    getPricesCount();
+    getMyRecord();
+    getChargeQrCode();
     //check();
     // showBtnTxt("立即领取");
     // btnStatus = BTN_STATUS_ENABLE;
@@ -281,22 +437,18 @@
     
     function start() {
         if (status !== STATUS_NONE) {
-            if (gameTime <= 0) {
-                msg("没有更多抽奖次数！");
+            if (pricesCount.length <= 0) {
+                if (myRecords.length > 0) {
+                    alertDoneChance();
+                } else {
+                    alertNoChance();
+                }
             } else if (!randomStartTime) {
+                status = STATUS_STARTING;
                 randomStartTime = Date.now();
                 run();
-            } else if (Date.now() - randomStartTime > RANDOM_COUNT * 1000) {
-                status = STATUS_END;
-                randomStartTime = 0;
-                setTimeout(handleResult, 20);
+                doTurntable();
             }
-        }
-    }
-    
-    function recordClick() {
-        if (btnStatus !== BTN_STATUS_ENABLE) {
-            return;
         }
     }
 
@@ -312,40 +464,241 @@
                 if (activeItem) {
                     activeItem.classList.remove("active");
                 }
-                document.querySelector(".item-" + currentIndex++ % 8).classList.add("active");
+                var inIndex = currentIndex++ % 8;
+                document.querySelector(".item-" + inIndex).classList.add("active");
                 clock = Date.now();
+
+                if (Date.now() - randomStartTime > RANDOM_COUNT * 1000 && prizeData[inIndex] && prizeUuid === prizeData[inIndex].uuid) {
+                    handleResult();
+                }
             });
         }
     }
-    function check() {
-        showWait();
+
+    /**
+     * 获取奖品列表
+     * */
+    function getPrices() {
         ajax({
-            url: "http://" + domain + "/activity/check/" + activityUuid + "?id=" + id,
-            type: "GET",
-            data: {},
-            dataType: "json",
+            url: API_PRICE_LIST,
+            data: {deviceUuid: deviceUuid, activityUuid: activityUuid},
             success: function (response) {
-                if (typeof response === "string") {
-                    response = JSON.parse(response || "{}")
+                response = JSON.parse(response);
+                prizeData = response.data || [];
+                for(var i = 0; i < prizeData.length; i++) {
+                    var imgUrl = prizeData[i].imgUrl;
+                    var prizeName = prizeData[i].prizeName;
+                    document.querySelector(".item-" + i + " img").src = imgUrl;
+                    document.querySelector(".item-" + i + " p").innerHTML = prizeName;
                 }
-                var status = response.status;
-                var msg = response.msg;
-                if (status === 1) {
-                    showBtnTxt("立即领取");
-                    btnStatus = BTN_STATUS_ENABLE;
-                } else {
-                    showError();
-                    showBtnTxt(msg);
-                }
-            },
-            fail: function (status) {
-                showError();
-                showBtnTxt("操作失败，请稍后重试");
             }
         });
     }
 
+    /**
+     * 抽奖次数
+     * */
+    function getPricesCount() {
+        ajax({
+            url: API_PRICE_CHANCE,
+            data: {deviceUuid: deviceUuid, activityUuid: activityUuid},
+            success: function (response) {
+                response = JSON.parse(response);
+                pricesCount = response.data || [];
+                document.querySelector(".start-btn font").innerHTML = "还剩下" + pricesCount.length + "次";
+                if (pricesCount.length > 0) {
+                    alertHaveChance();
+                }
+            }
+        });
+    }
 
+    /**
+     * 获取支付二维码
+     * */
+    function getChargeQrCode() {
+        ajax({
+            url: API_CHARGE_QRCODE,
+            data: {deviceUuid: deviceUuid, activityUuid: activityUuid},
+            success: function (response) {
+                document.querySelector(".button-msg-qrcode img").src = response;
+            }
+        });
+    }
+
+    /**
+     * 获取我的记录
+     * */
+    function getMyRecord() {
+        ajax({
+            url: API_PRICE_MY_RECORD,
+            data: {page: 1, pageSize: 200, deviceUuid: deviceUuid, activityUuid: activityUuid},
+            success: function (response) {
+                response = JSON.parse(response);
+                myRecords = (response.data).result || [];
+                var content = '';
+                if (myRecords.length > 0) {
+                    document.querySelector("#record-btn-container").classList.remove("hide");
+                    for(var i = 0; i < myRecords.length; i++) {
+                        var uuid = myRecords[i].uuid;
+                        var claimStatus = myRecords[i].claimStatus;
+                        var prizeName = myRecords[i].prizeName;
+                        var updateTime = myRecords[i].updateTime;
+                        content += '<button class="item"><i>' + (i + 1) + '</i><p>' + updateTime.substr(0, 10) + ' 中奖ID：<font>' + uuid + '</font></p><p>抽取奖品：' + prizeName + '</p><p>' + getPrizeStatus(claimStatus) + '</p></button>';
+                    }
+                }
+                document.querySelector(".record-content").innerHTML = content;
+                document.querySelector(".record-content button").focus();
+            }
+        });
+    }
+
+    /**
+     * 抽奖次数
+     * */
+    function doTurntable() {
+        ajax({
+            url: API_PRICE_JACKPOT,
+            data: {id: pricesCount[0], activityUuid: activityUuid},
+            success: function (response) {
+                // 重新获取抽奖次数
+                getPricesCount();
+                response = JSON.parse(response);
+                var status = response.status;
+                if (status === 1) {
+                    prizeUuid = response.data.prizeUuid;
+                } else {
+                    handleResult();
+                }
+            }
+        });
+    }
+
+    function handleResult() {
+        status = STATUS_END;
+        randomStartTime = 0;
+        clearInterval(runtimer);
+        runtimer = 0;
+    }
+
+    /**
+     * 获得抽奖机会
+     * */
+    function alertHaveChance() {
+        if (isAlert) {
+            return;
+        }
+        isAlert = true;
+        var btn = document.querySelector(".button-msg-have-chance");
+        showMask();
+        btn.classList.remove("hide");
+        btn.focus();
+    }
+
+    /**
+     * 抽奖机会用完
+     * */
+    function alertDoneChance() {
+        var btn = document.querySelector(".button-msg-done-chance");
+        showMask();
+        btn.classList.remove("hide");
+        btn.focus();
+        if (getHash() !== "doneChance") {
+            window.location.hash = "doneChance";
+        }
+    }
+
+    /**
+     * 没有抽奖机会
+     * */
+    function alertNoChance() {
+        var btn = document.querySelector(".button-msg-no-chance");
+        showMask();
+        btn.classList.remove("hide");
+        btn.focus();
+        if (getHash() !== "noneChance") {
+            window.location.hash = "noneChance";
+        }
+    }
+    /**
+     * 支付二维码
+     * */
+    function alertQrCode() {
+        var btn = document.querySelector(".button-msg-qrcode");
+        showMask();
+        btn.classList.remove("hide");
+        btn.focus();
+        if (getHash() !== "qrcode") {
+            window.location.hash = "qrcode";
+        }
+    }
+
+    function hideChanceMsg() {
+        hideMask();
+        document.querySelector(".button-msg-have-chance").classList.add("hide");
+        document.querySelector(".button-msg-done-chance").classList.add("hide");
+        document.querySelector(".button-msg-no-chance").classList.add("hide");
+        document.querySelector(".button-msg-qrcode").classList.add("hide");
+        document.querySelector(".start-btn").focus();
+    }
+
+    function showMask() {
+        document.querySelector(".mask").classList.remove("hide");
+    }
+    function hideMask() {
+        document.querySelector(".mask").classList.add("hide");
+    }
+
+    function showRecord() {
+        if (status !== STATUS_STARTING) {
+            currentPage = PAGE_RECORD;
+            window.location.hash = "record";
+        }
+    }
+
+    function hashChange() {
+        hideChanceMsg();
+        var hash = getHash();
+        if (hash === "qrcode") {
+            alertQrCode();
+        } else if (hash === "doneChance") {
+            alertDoneChance();
+        } else if (hash === "noneChance") {
+            alertNoChance();
+        }
+
+        if (hash === "record") {
+            document.querySelector("#activity").classList.add("hide");
+            document.querySelector("#record").classList.remove("hide");
+            document.querySelector(".device-id font").innerHTML = deviceUuid;
+            getMyRecord();
+        } else {
+            document.querySelector("#activity").classList.remove("hide");
+            document.querySelector("#record").classList.add("hide");
+            document.querySelector(".start-btn").focus();
+        }
+    }
+
+    function getHash() {
+        return window.location.hash.replace(/#/g, "");
+    }
+    function getPrizeStatus(claimStatus) {
+        // "claimStatus": 3, // 奖品领取状态：0-未抽奖，1-未中奖，2-已中奖未领取，3-已领取, 4-正在抽
+        switch (claimStatus) {
+            case 0:
+                return "未抽奖";
+            case 1:
+                return "未中奖";
+            case 2:
+                return "已中奖未领取";
+            case 3:
+                return "已领取";
+            case 4:
+                return "正在抽";
+            default:
+                return "未知状态";
+        }
+    }
     function getQueryString(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
         var r = window.location.search.substr(1).match(reg);
@@ -357,7 +710,7 @@
 
     function ajax(options) {
         options = options || {};
-        options.type = (options.type || "GET").toUpperCase();
+        options.type = (options.type || "post").toUpperCase();
         options.dataType = options.dataType || "json";
         var params = formatParams(options.data);
         //创建xhr对象 - 非IE6
@@ -367,11 +720,11 @@
             var xhr = new ActiveXObject('Microsoft.XMLHTTP');
         }
         //GET POST 两种请求方式
-        if (options.type == "GET") {
+        if (options.type === "GET") {
             xhr.open("GET", options.url, true);
             xhr.setRequestHeader("terminalType", "ottWeb");
             xhr.send(null);
-        } else if (options.type == "POST") {
+        } else {
             xhr.open("POST", options.url, true);
             //设置表单提交时的内容类型
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -380,7 +733,7 @@
         }
         //接收
         xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4) {
+            if (xhr.readyState === 4) {
                 var status = xhr.status;
                 if (status >= 200 && status < 300) {
                     options.success && options.success(xhr.responseText);
@@ -397,7 +750,7 @@
         for (var name in data) {
             arr.push(encodeURIComponent(name) + "=" + encodeURIComponent(data[name]));
         }
-        arr.push(("v=" + Math.random()).replace(".", ""));
+        // arr.push(("v=" + Math.random()).replace(".", ""));
         return arr.join("&");
     }
 
