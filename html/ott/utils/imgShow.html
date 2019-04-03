@@ -31,7 +31,8 @@
 </head>
 <body>
     <div class="container">
-
+        <!--此处src引号里面换为图片地址，必须是全地址-->
+        <img src="https://s3m.milkjpg.com/galileo/671801-4ab57b9fb1b0f414c4ebaeb3284d9237.jpg">
     </div>
 </body>
 <script>
@@ -61,11 +62,11 @@
         return document.querySelector(id);
     }
 
-    var imgUrl = getQueryString("img");
-    if (imgUrl) {
-        var img = document.createElement("img");
-        img.src = decodeURIComponent(imgUrl);
-        $(".container").appendChild(img);
-    }
+    // var imgUrl = getQueryString("img");
+    // if (imgUrl) {
+    //     var img = document.createElement("img");
+    //     img.src = decodeURIComponent(imgUrl);
+    //     $(".container").appendChild(img);
+    // }
 </script>
 </html>
